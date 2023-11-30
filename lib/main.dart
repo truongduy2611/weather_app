@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_config/flutter_config.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  FlutterConfig.loadEnvVariables();
   runApp(const MyApp());
 }
 
