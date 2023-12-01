@@ -4,16 +4,16 @@ part 'weather_location.freezed.dart';
 part 'weather_location.g.dart';
 
 @freezed
-class WeatherLocation with _$WeatherLocation {
+sealed class WeatherLocation with _$WeatherLocation {
   const factory WeatherLocation({
     required String name,
     required String region,
     required String country,
     required double lat,
     required double lon,
-    required String? tzId,
-    required int? localTimeEpoch,
-    required String? localTime,
+    @JsonKey(name: 'tz_id') required String? tzId,
+    @JsonKey(name: 'localtime_epoch') required int? localTimeEpoch,
+    @JsonKey(name: 'localtime') required String? localTime,
     required int? id,
     required String? url,
   }) = _WeatherLocation;

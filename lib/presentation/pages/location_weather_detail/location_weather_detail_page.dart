@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:weather_app/core/core.dart';
 import 'package:weather_app/domain/entity/entities.dart';
+import 'package:weather_app/presentation/pages/home/bloc/favorite_location/favorite_location_cubit.dart';
 import 'package:weather_app/presentation/widgets/error_container.dart';
 import 'package:weather_app/presentation/widgets/leading_button.dart';
 
@@ -48,6 +50,9 @@ class _LocationWeatherDetailPageState extends State<LocationWeatherDetailPage> {
       appBar: AppBar(
         leading: const LeadingButton(),
         title: Text(widget.locationName),
+        actions: [
+          _buildFavoriteButton(),
+        ],
       ),
       body: Center(
         child:
@@ -68,6 +73,46 @@ class _LocationWeatherDetailPageState extends State<LocationWeatherDetailPage> {
     );
   }
 
+  Widget _buildFavoriteButton() {
+    return BlocBuilder<LocationWeatherDetailCubit, LocationWeatherDetailState>(
+      builder: (context, detailState) {
+        return detailState.maybeWhen(
+          loaded: (forecast) {
+            return BlocBuilder<FavoriteLocationCubit, FavoriteLocationState>(
+              builder: (context, state) {
+                return state.when(
+                  initial: () {
+                    return const SizedBox();
+                  },
+                  loaded: (favoriteList) {
+                    final hasFavorite = favoriteList.firstWhereOrNull(
+                            (e) => e.location.url == widget.location) !=
+                        null;
+
+                    return IconButton(
+                      onPressed: () {
+                        context
+                            .read<FavoriteLocationCubit>()
+                            .favorite(forecast);
+                      },
+                      icon: Icon(
+                        hasFavorite ? Icons.favorite : Icons.favorite_border,
+                        color: hasFavorite ? Colors.pink : Colors.grey,
+                      ),
+                    );
+                  },
+                );
+              },
+            );
+          },
+          orElse: () {
+            return const SizedBox();
+          },
+        );
+      },
+    );
+  }
+
   Widget _buildForecast(WeatherForecast forecast) {
     return SizedBox(
       width: double.infinity,
@@ -82,7 +127,7 @@ class _LocationWeatherDetailPageState extends State<LocationWeatherDetailPage> {
             ),
             const Gap(4),
             Image.network(
-              forecast.current.condition.iconUrl,
+              forecast.current.condition.iconUrl(128),
               frameBuilder: (BuildContext context, Widget child, int? frame,
                   bool wasSynchronouslyLoaded) {
                 if (wasSynchronouslyLoaded) {
@@ -109,11 +154,5 @@ class _LocationWeatherDetailPageState extends State<LocationWeatherDetailPage> {
         ),
       ),
     );
-  }
-}
-
-extension IconUrl on Condition {
-  String get iconUrl {
-    return "https:${icon.replaceAll('64x64', '128x128')}";
   }
 }

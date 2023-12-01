@@ -18,6 +18,6 @@ _$WeatherForecastModelImpl _$$WeatherForecastModelImplFromJson(
 Map<String, dynamic> _$$WeatherForecastModelImplToJson(
         _$WeatherForecastModelImpl instance) =>
     <String, dynamic>{
-      'current': instance.current,
-      'location': instance.location,
+      'current': instance.current.toJson(),
+      'location': instance.location.toJson(),
     };

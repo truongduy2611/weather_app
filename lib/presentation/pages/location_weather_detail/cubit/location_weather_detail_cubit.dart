@@ -19,7 +19,13 @@ class LocationWeatherDetailCubit extends Cubit<LocationWeatherDetailState> {
   Future<void> fetchLocationWeatherData() async {
     try {
       final forecast = await repository.getCurrentWeather(location);
-      emit(LocationWeatherDetailState.loaded(forecast));
+      emit(
+        LocationWeatherDetailState.loaded(
+          forecast.copyWith(
+            location: forecast.location.copyWith(url: location),
+          ),
+        ),
+      );
     } catch (e) {
       emit(LocationWeatherDetailState.error(e.apiError.toString()));
     }

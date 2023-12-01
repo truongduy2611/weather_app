@@ -21,11 +21,17 @@ CurrentWeatherForecast _$CurrentWeatherForecastFromJson(
 
 /// @nodoc
 mixin _$CurrentWeatherForecast {
+  @JsonKey(name: 'last_updated_epoch')
   int get lastUpdatedEpoch => throw _privateConstructorUsedError;
+  @JsonKey(name: 'last_updated')
   String get lastUpdated => throw _privateConstructorUsedError;
+  @JsonKey(name: 'temp_c')
   double get tempC => throw _privateConstructorUsedError;
+  @JsonKey(name: 'temp_f')
   double get tempF => throw _privateConstructorUsedError;
+  @JsonKey(name: 'feelslike_f')
   double get feelsLikeF => throw _privateConstructorUsedError;
+  @JsonKey(name: 'feelslike_c')
   double get feelsLikeC => throw _privateConstructorUsedError;
   double get uv => throw _privateConstructorUsedError;
   double get humidity => throw _privateConstructorUsedError;
@@ -45,12 +51,12 @@ abstract class $CurrentWeatherForecastCopyWith<$Res> {
       _$CurrentWeatherForecastCopyWithImpl<$Res, CurrentWeatherForecast>;
   @useResult
   $Res call(
-      {int lastUpdatedEpoch,
-      String lastUpdated,
-      double tempC,
-      double tempF,
-      double feelsLikeF,
-      double feelsLikeC,
+      {@JsonKey(name: 'last_updated_epoch') int lastUpdatedEpoch,
+      @JsonKey(name: 'last_updated') String lastUpdated,
+      @JsonKey(name: 'temp_c') double tempC,
+      @JsonKey(name: 'temp_f') double tempF,
+      @JsonKey(name: 'feelslike_f') double feelsLikeF,
+      @JsonKey(name: 'feelslike_c') double feelsLikeC,
       double uv,
       double humidity,
       int cloud,
@@ -147,12 +153,12 @@ abstract class _$$CurrentWeatherForecastImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int lastUpdatedEpoch,
-      String lastUpdated,
-      double tempC,
-      double tempF,
-      double feelsLikeF,
-      double feelsLikeC,
+      {@JsonKey(name: 'last_updated_epoch') int lastUpdatedEpoch,
+      @JsonKey(name: 'last_updated') String lastUpdated,
+      @JsonKey(name: 'temp_c') double tempC,
+      @JsonKey(name: 'temp_f') double tempF,
+      @JsonKey(name: 'feelslike_f') double feelsLikeF,
+      @JsonKey(name: 'feelslike_c') double feelsLikeC,
       double uv,
       double humidity,
       int cloud,
@@ -235,12 +241,12 @@ class __$$CurrentWeatherForecastImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CurrentWeatherForecastImpl implements _CurrentWeatherForecast {
   const _$CurrentWeatherForecastImpl(
-      {required this.lastUpdatedEpoch,
-      required this.lastUpdated,
-      required this.tempC,
-      required this.tempF,
-      required this.feelsLikeF,
-      required this.feelsLikeC,
+      {@JsonKey(name: 'last_updated_epoch') required this.lastUpdatedEpoch,
+      @JsonKey(name: 'last_updated') required this.lastUpdated,
+      @JsonKey(name: 'temp_c') required this.tempC,
+      @JsonKey(name: 'temp_f') required this.tempF,
+      @JsonKey(name: 'feelslike_f') required this.feelsLikeF,
+      @JsonKey(name: 'feelslike_c') required this.feelsLikeC,
       required this.uv,
       required this.humidity,
       required this.cloud,
@@ -250,16 +256,22 @@ class _$CurrentWeatherForecastImpl implements _CurrentWeatherForecast {
       _$$CurrentWeatherForecastImplFromJson(json);
 
   @override
+  @JsonKey(name: 'last_updated_epoch')
   final int lastUpdatedEpoch;
   @override
+  @JsonKey(name: 'last_updated')
   final String lastUpdated;
   @override
+  @JsonKey(name: 'temp_c')
   final double tempC;
   @override
+  @JsonKey(name: 'temp_f')
   final double tempF;
   @override
+  @JsonKey(name: 'feelslike_f')
   final double feelsLikeF;
   @override
+  @JsonKey(name: 'feelslike_c')
   final double feelsLikeC;
   @override
   final double uv;
@@ -320,12 +332,12 @@ class _$CurrentWeatherForecastImpl implements _CurrentWeatherForecast {
 
 abstract class _CurrentWeatherForecast implements CurrentWeatherForecast {
   const factory _CurrentWeatherForecast(
-      {required final int lastUpdatedEpoch,
-      required final String lastUpdated,
-      required final double tempC,
-      required final double tempF,
-      required final double feelsLikeF,
-      required final double feelsLikeC,
+      {@JsonKey(name: 'last_updated_epoch') required final int lastUpdatedEpoch,
+      @JsonKey(name: 'last_updated') required final String lastUpdated,
+      @JsonKey(name: 'temp_c') required final double tempC,
+      @JsonKey(name: 'temp_f') required final double tempF,
+      @JsonKey(name: 'feelslike_f') required final double feelsLikeF,
+      @JsonKey(name: 'feelslike_c') required final double feelsLikeC,
       required final double uv,
       required final double humidity,
       required final int cloud,
@@ -335,16 +347,22 @@ abstract class _CurrentWeatherForecast implements CurrentWeatherForecast {
       _$CurrentWeatherForecastImpl.fromJson;
 
   @override
+  @JsonKey(name: 'last_updated_epoch')
   int get lastUpdatedEpoch;
   @override
+  @JsonKey(name: 'last_updated')
   String get lastUpdated;
   @override
+  @JsonKey(name: 'temp_c')
   double get tempC;
   @override
+  @JsonKey(name: 'temp_f')
   double get tempF;
   @override
+  @JsonKey(name: 'feelslike_f')
   double get feelsLikeF;
   @override
+  @JsonKey(name: 'feelslike_c')
   double get feelsLikeC;
   @override
   double get uv;

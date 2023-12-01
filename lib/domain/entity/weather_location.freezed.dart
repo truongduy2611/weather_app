@@ -25,8 +25,11 @@ mixin _$WeatherLocation {
   String get country => throw _privateConstructorUsedError;
   double get lat => throw _privateConstructorUsedError;
   double get lon => throw _privateConstructorUsedError;
+  @JsonKey(name: 'tz_id')
   String? get tzId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'localtime_epoch')
   int? get localTimeEpoch => throw _privateConstructorUsedError;
+  @JsonKey(name: 'localtime')
   String? get localTime => throw _privateConstructorUsedError;
   int? get id => throw _privateConstructorUsedError;
   String? get url => throw _privateConstructorUsedError;
@@ -49,9 +52,9 @@ abstract class $WeatherLocationCopyWith<$Res> {
       String country,
       double lat,
       double lon,
-      String? tzId,
-      int? localTimeEpoch,
-      String? localTime,
+      @JsonKey(name: 'tz_id') String? tzId,
+      @JsonKey(name: 'localtime_epoch') int? localTimeEpoch,
+      @JsonKey(name: 'localtime') String? localTime,
       int? id,
       String? url});
 }
@@ -139,9 +142,9 @@ abstract class _$$WeatherLocationImplCopyWith<$Res>
       String country,
       double lat,
       double lon,
-      String? tzId,
-      int? localTimeEpoch,
-      String? localTime,
+      @JsonKey(name: 'tz_id') String? tzId,
+      @JsonKey(name: 'localtime_epoch') int? localTimeEpoch,
+      @JsonKey(name: 'localtime') String? localTime,
       int? id,
       String? url});
 }
@@ -222,9 +225,9 @@ class _$WeatherLocationImpl implements _WeatherLocation {
       required this.country,
       required this.lat,
       required this.lon,
-      required this.tzId,
-      required this.localTimeEpoch,
-      required this.localTime,
+      @JsonKey(name: 'tz_id') required this.tzId,
+      @JsonKey(name: 'localtime_epoch') required this.localTimeEpoch,
+      @JsonKey(name: 'localtime') required this.localTime,
       required this.id,
       required this.url});
 
@@ -242,10 +245,13 @@ class _$WeatherLocationImpl implements _WeatherLocation {
   @override
   final double lon;
   @override
+  @JsonKey(name: 'tz_id')
   final String? tzId;
   @override
+  @JsonKey(name: 'localtime_epoch')
   final int? localTimeEpoch;
   @override
+  @JsonKey(name: 'localtime')
   final String? localTime;
   @override
   final int? id;
@@ -303,9 +309,9 @@ abstract class _WeatherLocation implements WeatherLocation {
       required final String country,
       required final double lat,
       required final double lon,
-      required final String? tzId,
-      required final int? localTimeEpoch,
-      required final String? localTime,
+      @JsonKey(name: 'tz_id') required final String? tzId,
+      @JsonKey(name: 'localtime_epoch') required final int? localTimeEpoch,
+      @JsonKey(name: 'localtime') required final String? localTime,
       required final int? id,
       required final String? url}) = _$WeatherLocationImpl;
 
@@ -323,10 +329,13 @@ abstract class _WeatherLocation implements WeatherLocation {
   @override
   double get lon;
   @override
+  @JsonKey(name: 'tz_id')
   String? get tzId;
   @override
+  @JsonKey(name: 'localtime_epoch')
   int? get localTimeEpoch;
   @override
+  @JsonKey(name: 'localtime')
   String? get localTime;
   @override
   int? get id;

@@ -14,3 +14,9 @@ class Condition with _$Condition {
   factory Condition.fromJson(Map<String, dynamic> json) =>
       _$ConditionFromJson(json);
 }
+
+extension IconUrl on Condition {
+  String iconUrl(int size) {
+    return "https:${icon.replaceAll('64x64', '${size}x$size')}";
+  }
+}

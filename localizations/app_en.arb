@@ -2,5 +2,14 @@
     "@_APP_PAGE": {},
     "@_HOME_PAGE": {},
     "homePageWeatherTitle": "Weather",
-    "homePageSearchHintText": "Search for a city or airport"
+    "homePageSearchHintText": "Search for a city or airport",
+    "homePageNoResultFound": "No result found for \"{keyword}\"",
+    "@homePageNoResultFound": {
+        "description": "keyword",
+        "placeholders": {
+            "keyword": {
+                "type": "String"
+            }
+        }
+    }
 }

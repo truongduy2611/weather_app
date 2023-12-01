@@ -21,7 +21,7 @@ class SearchWidget extends StatelessWidget {
         onChanged: onChanged,
         controller: controller,
         decoration: InputDecoration(
-          fillColor: Theme.of(context).colorScheme.inversePrimary,
+          fillColor: Theme.of(context).colorScheme.secondaryContainer,
           filled: true,
           border: InputBorder.none,
           prefixIcon: const Icon(Icons.search),

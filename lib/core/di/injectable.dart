@@ -9,7 +9,7 @@ import 'package:weather_app/core/di/injectable.config.dart';
 final sl = GetIt.instance;
 
 @InjectableInit(preferRelativeImports: false)
-void configureDependencies() => sl.init();
+Future<GetIt> configureDependencies() => sl.init();
 
 @module
 abstract class RegisterModule {

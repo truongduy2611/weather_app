@@ -1,12 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:weather_app/core/core.dart';
 import 'package:weather_app/domain/entity/entities.dart';
+import 'package:weather_app/presentation/pages/home/bloc/favorite_location/favorite_location_cubit.dart';
 import 'package:weather_app/presentation/routing/router.gr.dart';
 import 'package:weather_app/presentation/widgets/error_container.dart';
 
 import 'bloc/search_location/search_location_bloc.dart';
+import 'widgets/favorite_location_tile.dart';
 import 'widgets/search_widget.dart';
 
 @RoutePage()
@@ -48,24 +51,22 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(_translation.homePageWeatherTitle),
-        ),
-        body: Column(
-          children: [
-            Padding(
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(48),
+            child: Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4),
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
               child: SearchWidget(
                 onChanged: _onSearchChanged,
                 controller: _searchTextController,
               ),
             ),
-            Expanded(
-              child: Stack(
-                children: [
-                  _buildSearchSuggestions(),
-                ],
-              ),
-            )
+          ),
+        ),
+        body: Stack(
+          children: [
+            _buildFavoriteList(),
+            Positioned.fill(child: _buildSearchSuggestions()),
           ],
         ),
       ),
@@ -73,6 +74,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _onTapLocation(WeatherLocation location) {
+    _searchTextController.clear();
+    WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
+
     AutoRouter.of(context).push(
       LocationWeatherDetailRoute(
         location: location.url ?? location.name,
@@ -86,36 +90,84 @@ class _HomePageState extends State<HomePage> {
       valueListenable: _searchTextController,
       builder: (context, value, widget) {
         if (value.text.isNotEmpty) {
-          return BlocBuilder<SearchLocationBloc, SearchLocationState>(
-            builder: (context, state) {
-              return state.when(
-                initial: () {
-                  return const SizedBox();
-                },
-                error: (message) {
-                  return ErrorContainer(errorMessage: message);
-                },
-                loaded: (locations) {
-                  return ListView.builder(
-                    padding: const EdgeInsets.only(top: 16),
-                    itemBuilder: (context, i) {
-                      final location = locations[i];
-                      return ListTile(
-                        title: Text(location.name),
-                        subtitle: Text(location.country),
-                        onTap: () {
-                          _onTapLocation(location);
-                        },
+          return Material(
+            child: BlocBuilder<SearchLocationBloc, SearchLocationState>(
+              builder: (context, state) {
+                return state.when(
+                  initial: () {
+                    return const SizedBox();
+                  },
+                  error: (message) {
+                    return ErrorContainer(errorMessage: message);
+                  },
+                  loaded: (locations) {
+                    if (locations.isEmpty) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.search_rounded,
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                            size: 64,
+                          ),
+                          const Gap(8),
+                          Text(
+                            _translation.homePageNoResultFound(
+                                _searchTextController.text),
+                          ),
+                        ],
                       );
-                    },
-                    itemCount: locations.length,
-                  );
-                },
-              );
-            },
+                    }
+                    return ListView.builder(
+                      padding: const EdgeInsets.only(top: 16),
+                      itemBuilder: (context, i) {
+                        final location = locations[i];
+                        return ListTile(
+                          title: Text(location.name),
+                          subtitle: Text(location.country),
+                          onTap: () {
+                            _onTapLocation(location);
+                          },
+                        );
+                      },
+                      itemCount: locations.length,
+                    );
+                  },
+                );
+              },
+            ),
           );
         }
         return const SizedBox();
+      },
+    );
+  }
+
+  Widget _buildFavoriteList() {
+    return BlocBuilder<FavoriteLocationCubit, FavoriteLocationState>(
+      builder: (context, state) {
+        return state.when(
+          initial: () {
+            return const SizedBox();
+          },
+          loaded: (favoriteList) {
+            return ListView.separated(
+              padding: const EdgeInsets.all(16),
+              separatorBuilder: (context, i) => const Gap(16),
+              itemBuilder: (context, i) {
+                final favorite = favoriteList[i];
+
+                return FavoriteLocationTile(
+                  favorite: favorite,
+                  onTap: () {
+                    _onTapLocation(favorite.location);
+                  },
+                );
+              },
+              itemCount: favoriteList.length,
+            );
+          },
+        );
       },
     );
   }
