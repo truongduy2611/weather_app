@@ -51,6 +51,7 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(_translation.homePageWeatherTitle),
+          centerTitle: true,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(48),
             child: Padding(

@@ -244,6 +244,7 @@ class _LocationWeatherDetailPageState extends State<LocationWeatherDetailPage> {
                 ),
                 style: _theme.textTheme.bodySmall,
               ),
+              const Gap(24),
             ],
           ),
         ),

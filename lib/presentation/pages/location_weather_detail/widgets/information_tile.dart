@@ -37,6 +37,7 @@ class InformationTile extends StatelessWidget {
             info,
             style: theme.textTheme.displaySmall
                 ?.copyWith(fontWeight: FontWeight.w300),
+            maxLines: 1,
           ),
         ],
       ),
