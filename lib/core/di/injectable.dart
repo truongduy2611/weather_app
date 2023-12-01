@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_config/flutter_config.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
@@ -13,12 +14,21 @@ void configureDependencies() => sl.init();
 @module
 abstract class RegisterModule {
   @LazySingleton()
-  Dio get dio => Dio(
-        BaseOptions(
-          baseUrl: '${getBaseUrl()}/v1',
-          queryParameters: {
-            'key': FlutterConfig.get('WEATHER_API_KEY'),
-          },
-        ),
-      );
+  Dio get dio {
+    final dio = Dio(
+      BaseOptions(
+        baseUrl: '${getBaseUrl()}/v1',
+        queryParameters: {
+          'key': FlutterConfig.get('WEATHER_API_KEY'),
+        },
+      ),
+    );
+
+    if (kDebugMode) {
+      return dio
+        ..interceptors
+            .add(LogInterceptor(requestBody: true, responseBody: true));
+    }
+    return dio;
+  }
 }
