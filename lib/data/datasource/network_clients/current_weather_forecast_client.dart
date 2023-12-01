@@ -9,8 +9,7 @@ part 'current_weather_forecast_client.g.dart';
 @lazySingleton
 abstract class CurrentWeatherForecastClient {
   @factoryMethod
-  factory CurrentWeatherForecastClient(Dio dio, {String baseUrl}) =
-      _CurrentWeatherForecastClient;
+  factory CurrentWeatherForecastClient(Dio dio) = _CurrentWeatherForecastClient;
 
   @GET('/current.json')
   Future<WeatherForecastModel> getCurrentWeather(@Query('q') String query);

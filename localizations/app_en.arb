@@ -1,5 +1,6 @@
 {
     "@_APP_PAGE": {},
     "@_HOME_PAGE": {},
-    "homePageWeatherTitle": "Weather"
+    "homePageWeatherTitle": "Weather",
+    "homePageSearchHintText": "Search for a city or airport"
 }

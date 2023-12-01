@@ -14,9 +14,8 @@ void main() {
   late LocationSuggestionApiDataSource dataSource;
   late LocationSuggestionsClient client;
   const query = 'London';
-  late List<WeatherLocationModel> locations;
   final data = 'search.json'.toFixture()["data"] as List<dynamic>;
-  locations = data.map((e) => WeatherLocationModel.fromJson(e)).toList();
+  final locations = data.map((e) => WeatherLocationModel.fromJson(e)).toList();
 
   setUp(() async {
     registerFallbackValue(Uri());

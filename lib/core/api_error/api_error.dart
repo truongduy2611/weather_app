@@ -11,7 +11,7 @@ class APIError implements Exception {
 
   int? statusCode;
   ResponseException? responseException;
-  Exception? originalError;
+  Object? originalError;
 
   factory APIError.fromJson(Map<String, dynamic> json) => APIError(
         responseException: json['error'] == null
@@ -87,7 +87,7 @@ class ResponseException {
       };
 }
 
-extension ApiErrorExtension on Exception {
+extension ApiErrorExtension on Object {
   APIError get apiError {
     final error = this;
     if (error is DioException) {

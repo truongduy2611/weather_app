@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/core.dart';
 
 class SearchWidget extends StatelessWidget {
   const SearchWidget({
@@ -24,6 +25,7 @@ class SearchWidget extends StatelessWidget {
           filled: true,
           border: InputBorder.none,
           prefixIcon: const Icon(Icons.search),
+          hintText: Translation.of(context).homePageSearchHintText,
         ),
       ),
     );
