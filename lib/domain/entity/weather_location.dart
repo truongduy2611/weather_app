@@ -15,6 +15,7 @@ class WeatherLocation with _$WeatherLocation {
     required int? localTimeEpoch,
     required String? localTime,
     required int? id,
+    required String? url,
   }) = _WeatherLocation;
 
   factory WeatherLocation.fromJson(Map<String, dynamic> json) =>

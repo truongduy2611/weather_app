@@ -18,6 +18,7 @@ _$WeatherLocationImpl _$$WeatherLocationImplFromJson(
       localTimeEpoch: json['localTimeEpoch'] as int?,
       localTime: json['localTime'] as String?,
       id: json['id'] as int?,
+      url: json['url'] as String?,
     );
 
 Map<String, dynamic> _$$WeatherLocationImplToJson(
@@ -32,4 +33,5 @@ Map<String, dynamic> _$$WeatherLocationImplToJson(
       'localTimeEpoch': instance.localTimeEpoch,
       'localTime': instance.localTime,
       'id': instance.id,
+      'url': instance.url,
     };

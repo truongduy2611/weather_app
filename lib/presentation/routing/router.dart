@@ -8,10 +8,15 @@ class AppRouter extends $AppRouter {
   RouteType get defaultRouteType => const RouteType.adaptive();
 
   @override
-  List<AutoRoute> get routes => [_homeRoute];
+  List<AutoRoute> get routes => [_homeRoute, locationDetailRoute];
 
   final _homeRoute = AdaptiveRoute(
     path: '/',
     page: HomeRoute.page,
+  );
+
+  final locationDetailRoute = AdaptiveRoute(
+    path: '/detail/:url',
+    page: LocationWeatherDetailRoute.page,
   );
 }

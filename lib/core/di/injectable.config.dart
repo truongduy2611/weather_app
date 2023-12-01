@@ -11,7 +11,7 @@
 import 'package:dio/dio.dart' as _i3;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
-import 'package:weather_app/core/di/injectable.dart' as _i14;
+import 'package:weather_app/core/di/injectable.dart' as _i15;
 import 'package:weather_app/data/datasource/datasource.dart' as _i9;
 import 'package:weather_app/data/datasource/location_suggestion_api_datasource.dart'
     as _i6;
@@ -31,6 +31,8 @@ import 'package:weather_app/domain/repository/weather_forecast_repository.dart'
     as _i12;
 import 'package:weather_app/presentation/pages/home/bloc/search_location/search_location_bloc.dart'
     as _i10;
+import 'package:weather_app/presentation/pages/location_weather_detail/cubit/location_weather_detail_cubit.dart'
+    as _i14;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -63,8 +65,10 @@ extension GetItInjectableX on _i1.GetIt {
     gh.lazySingleton<_i12.WeatherForecastRepository>(() =>
         _i13.WeatherForecastRepositoryImpl(
             gh<_i9.WeatherForecastApiDataSource>()));
+    gh.factory<_i14.LocationWeatherDetailCubit>(() =>
+        _i14.LocationWeatherDetailCubit(gh<_i12.WeatherForecastRepository>()));
     return this;
   }
 }
 
-class _$RegisterModule extends _i14.RegisterModule {}
+class _$RegisterModule extends _i15.RegisterModule {}

@@ -29,6 +29,7 @@ mixin _$WeatherLocation {
   int? get localTimeEpoch => throw _privateConstructorUsedError;
   String? get localTime => throw _privateConstructorUsedError;
   int? get id => throw _privateConstructorUsedError;
+  String? get url => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,7 +52,8 @@ abstract class $WeatherLocationCopyWith<$Res> {
       String? tzId,
       int? localTimeEpoch,
       String? localTime,
-      int? id});
+      int? id,
+      String? url});
 }
 
 /// @nodoc
@@ -76,6 +78,7 @@ class _$WeatherLocationCopyWithImpl<$Res, $Val extends WeatherLocation>
     Object? localTimeEpoch = freezed,
     Object? localTime = freezed,
     Object? id = freezed,
+    Object? url = freezed,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -114,6 +117,10 @@ class _$WeatherLocationCopyWithImpl<$Res, $Val extends WeatherLocation>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
+      url: freezed == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -135,7 +142,8 @@ abstract class _$$WeatherLocationImplCopyWith<$Res>
       String? tzId,
       int? localTimeEpoch,
       String? localTime,
-      int? id});
+      int? id,
+      String? url});
 }
 
 /// @nodoc
@@ -158,6 +166,7 @@ class __$$WeatherLocationImplCopyWithImpl<$Res>
     Object? localTimeEpoch = freezed,
     Object? localTime = freezed,
     Object? id = freezed,
+    Object? url = freezed,
   }) {
     return _then(_$WeatherLocationImpl(
       name: null == name
@@ -196,6 +205,10 @@ class __$$WeatherLocationImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
+      url: freezed == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -212,7 +225,8 @@ class _$WeatherLocationImpl implements _WeatherLocation {
       required this.tzId,
       required this.localTimeEpoch,
       required this.localTime,
-      required this.id});
+      required this.id,
+      required this.url});
 
   factory _$WeatherLocationImpl.fromJson(Map<String, dynamic> json) =>
       _$$WeatherLocationImplFromJson(json);
@@ -235,10 +249,12 @@ class _$WeatherLocationImpl implements _WeatherLocation {
   final String? localTime;
   @override
   final int? id;
+  @override
+  final String? url;
 
   @override
   String toString() {
-    return 'WeatherLocation(name: $name, region: $region, country: $country, lat: $lat, lon: $lon, tzId: $tzId, localTimeEpoch: $localTimeEpoch, localTime: $localTime, id: $id)';
+    return 'WeatherLocation(name: $name, region: $region, country: $country, lat: $lat, lon: $lon, tzId: $tzId, localTimeEpoch: $localTimeEpoch, localTime: $localTime, id: $id, url: $url)';
   }
 
   @override
@@ -256,13 +272,14 @@ class _$WeatherLocationImpl implements _WeatherLocation {
                 other.localTimeEpoch == localTimeEpoch) &&
             (identical(other.localTime, localTime) ||
                 other.localTime == localTime) &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.url, url) || other.url == url));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, name, region, country, lat, lon,
-      tzId, localTimeEpoch, localTime, id);
+      tzId, localTimeEpoch, localTime, id, url);
 
   @JsonKey(ignore: true)
   @override
@@ -289,7 +306,8 @@ abstract class _WeatherLocation implements WeatherLocation {
       required final String? tzId,
       required final int? localTimeEpoch,
       required final String? localTime,
-      required final int? id}) = _$WeatherLocationImpl;
+      required final int? id,
+      required final String? url}) = _$WeatherLocationImpl;
 
   factory _WeatherLocation.fromJson(Map<String, dynamic> json) =
       _$WeatherLocationImpl.fromJson;
@@ -312,6 +330,8 @@ abstract class _WeatherLocation implements WeatherLocation {
   String? get localTime;
   @override
   int? get id;
+  @override
+  String? get url;
   @override
   @JsonKey(ignore: true)
   _$$WeatherLocationImplCopyWith<_$WeatherLocationImpl> get copyWith =>

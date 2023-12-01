@@ -22,6 +22,7 @@ class WeatherLocationModel
     @JsonKey(name: 'localtime_epoch') required int? localTimeEpoch,
     @JsonKey(name: 'localtime') required String? localTime,
     required int? id,
+    required String? url,
   }) = _WeatherLocationModel;
 
   factory WeatherLocationModel.fromJson(Map<String, dynamic> json) =>
@@ -39,6 +40,7 @@ class WeatherLocationModel
       localTime: localTime,
       name: name,
       id: id,
+      url: url,
     );
   }
 }
