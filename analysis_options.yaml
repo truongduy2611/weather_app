@@ -3,8 +3,8 @@ include: package:flutter_lints/flutter.yaml
 linter:
   rules:
 analyzer:
-  exclude:
-    - "**/*.g.dart"
-    - "**/*.freezed.dart"
+  # exclude:
+  #   - "**/*.g.dart"
+  #   - "**/*.freezed.dart"
   errors:
     invalid_annotation_target: ignore

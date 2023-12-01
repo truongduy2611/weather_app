@@ -13,6 +13,10 @@ _$WeatherForecastModelImpl _$$WeatherForecastModelImplFromJson(
           json['current'] as Map<String, dynamic>),
       location: WeatherLocationModel.fromJson(
           json['location'] as Map<String, dynamic>),
+      forecast: json['forecast'] == null
+          ? null
+          : FutureWeatherForecastModel.fromJson(
+              json['forecast'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$WeatherForecastModelImplToJson(
@@ -20,4 +24,5 @@ Map<String, dynamic> _$$WeatherForecastModelImplToJson(
     <String, dynamic>{
       'current': instance.current.toJson(),
       'location': instance.location.toJson(),
+      'forecast': instance.forecast?.toJson(),
     };

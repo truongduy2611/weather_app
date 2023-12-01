@@ -41,18 +41,6 @@ class FavoriteDataBox {
 
 extension _CastMapToWeatherForecast on Map<dynamic, dynamic> {
   WeatherForecastModel get model {
-    final jsonData = <String, dynamic>{
-      ...this,
-      'current': <String, dynamic>{
-        ...this['current'],
-        'condition': <String, dynamic>{
-          ...this['current']['condition'],
-        },
-      },
-      'location': <String, dynamic>{
-        ...this['location'],
-      },
-    };
-    return WeatherForecastModel.fromJson(jsonData);
+    return WeatherForecastModel.fromJson(convertMap(this));
   }
 }

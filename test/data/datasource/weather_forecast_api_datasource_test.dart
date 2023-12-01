@@ -2,17 +2,16 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:weather_app/data/datasource/datasource.dart';
-import 'package:weather_app/data/datasource/network_clients/current_weather_forecast_client.dart';
+import 'package:weather_app/data/datasource/network_clients/weather_forecast_client.dart';
 import 'package:weather_app/data/model/models.dart';
 
 import '../../fixtures_reader.dart';
 
-class MockCurrentWeatherForecastClient extends Mock
-    implements CurrentWeatherForecastClient {}
+class MockWeatherForecastClient extends Mock implements WeatherForecastClient {}
 
 void main() {
   late WeatherForecastApiDataSource dataSource;
-  late CurrentWeatherForecastClient currentWeatherForecastClient;
+  late WeatherForecastClient client;
   const query = 'Ho Chi Minh City';
 
   final weatherForecastModel =
@@ -20,8 +19,8 @@ void main() {
 
   setUp(() async {
     registerFallbackValue(Uri());
-    currentWeatherForecastClient = MockCurrentWeatherForecastClient();
-    dataSource = WeatherForecastApiDataSource(currentWeatherForecastClient);
+    client = MockWeatherForecastClient();
+    dataSource = WeatherForecastApiDataSource(client);
   });
 
   group('test weather forecast datasource', () {
@@ -30,7 +29,7 @@ void main() {
       () async {
         // arrange
         when(
-          () => currentWeatherForecastClient.getCurrentWeather(query),
+          () => client.getCurrentWeather(query),
         ).thenAnswer(
           (_) async => weatherForecastModel,
         );
@@ -38,8 +37,8 @@ void main() {
         // act
         dataSource.getCurrentWeather(query);
         // assert
-        verify(() => currentWeatherForecastClient.getCurrentWeather(query));
-        verifyNoMoreInteractions(currentWeatherForecastClient);
+        verify(() => client.getCurrentWeather(query));
+        verifyNoMoreInteractions(client);
       },
     );
 
@@ -47,8 +46,7 @@ void main() {
       'should throw a DioException when the response code is 404 or other (unsuccess)',
       () async {
         // arrange
-        when(() => currentWeatherForecastClient.getCurrentWeather(query))
-            .thenThrow(
+        when(() => client.getCurrentWeather(query)).thenThrow(
           DioException(
             response: Response(
               data: 'Something went wrong',

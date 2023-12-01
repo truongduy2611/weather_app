@@ -14,4 +14,12 @@ class WeatherForecastRepositoryImpl implements WeatherForecastRepository {
     final weatherForecast = await _dataSource.getCurrentWeather(query);
     return weatherForecast.toEntity();
   }
+
+  @override
+  Future<WeatherForecast> getWeatherForecast(
+      String query, int numberOfDay) async {
+    final weatherForecast =
+        await _dataSource.getWeatherForecast(query, numberOfDay);
+    return weatherForecast.toEntity();
+  }
 }

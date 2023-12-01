@@ -3,13 +3,16 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 import 'package:weather_app/core/core.dart';
 import 'package:weather_app/domain/entity/entities.dart';
 import 'package:weather_app/presentation/pages/home/bloc/favorite_location/favorite_location_cubit.dart';
+import 'package:weather_app/presentation/pages/location_weather_detail/widgets/information_tile.dart';
 import 'package:weather_app/presentation/widgets/error_container.dart';
 import 'package:weather_app/presentation/widgets/leading_button.dart';
 
 import 'cubit/location_weather_detail_cubit.dart';
+import 'widgets/hour_forecast_tile.dart';
 
 @RoutePage()
 class LocationWeatherDetailPage extends StatefulWidget
@@ -114,45 +117,131 @@ class _LocationWeatherDetailPageState extends State<LocationWeatherDetailPage> {
   }
 
   Widget _buildForecast(WeatherForecast forecast) {
-    return SizedBox(
-      width: double.infinity,
-      height: double.infinity,
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              forecast.location.region.toUpperCase(),
-              style: _theme.textTheme.bodySmall,
-            ),
-            const Gap(4),
-            Image.network(
-              forecast.current.condition.iconUrl(128),
-              frameBuilder: (BuildContext context, Widget child, int? frame,
-                  bool wasSynchronouslyLoaded) {
-                if (wasSynchronouslyLoaded) {
-                  return child;
-                }
-                return AnimatedOpacity(
-                  opacity: frame == null ? 0 : 1,
-                  duration: const Duration(seconds: 1),
-                  curve: Curves.easeOut,
-                  child: child,
-                );
-              },
-            ),
-            Text(
-              "${forecast.current.tempC.round().toString()}°",
-              style: _theme.textTheme.displayLarge,
-            ),
-            const Gap(8),
-            Text(
-              forecast.current.condition.text,
-              style: _theme.textTheme.bodyLarge,
-            ),
-          ],
+    final forecastDay = forecast.forecast?.forecastday.isNotEmpty == true
+        ? forecast.forecast?.forecastday.first
+        : null;
+    final hourForecastList = forecastDay?.hour ?? [];
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                forecast.location.region.toUpperCase(),
+                style: _theme.textTheme.bodySmall,
+              ),
+              const Gap(4),
+              Image.network(
+                forecast.current.condition.iconUrl(128),
+                frameBuilder: (BuildContext context, Widget child, int? frame,
+                    bool wasSynchronouslyLoaded) {
+                  if (wasSynchronouslyLoaded) {
+                    return child;
+                  }
+                  return AnimatedOpacity(
+                    opacity: frame == null ? 0 : 1,
+                    duration: const Duration(seconds: 1),
+                    curve: Curves.easeOut,
+                    child: child,
+                  );
+                },
+              ),
+              Text(
+                "${forecast.current.tempC.round().toString()}°",
+                style: _theme.textTheme.displayLarge
+                    ?.copyWith(fontWeight: FontWeight.w200),
+              ),
+              const Gap(8),
+              Text(
+                forecast.current.condition.text,
+                style: _theme.textTheme.bodyLarge,
+              ),
+              const Gap(16),
+              SizedBox(
+                height: 128 + 32,
+                child: ListView.separated(
+                  separatorBuilder: (context, i) => const Gap(16),
+                  padding: const EdgeInsets.all(16),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: hourForecastList.length,
+                  itemBuilder: (context, i) => HourForecastTile(
+                    forecast: hourForecastList[i],
+                  ),
+                ),
+              ),
+              const Gap(16),
+              SizedBox(
+                height: 128,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: InformationTile(
+                          icon: const Icon(Icons.device_thermostat_rounded),
+                          title: Translation.of(context)
+                              .locationWeatherDetailPageFeelsLike,
+                          info:
+                              "${forecast.current.feelsLikeC.round().toString()}°",
+                        ),
+                      ),
+                      const Gap(16),
+                      Expanded(
+                        child: InformationTile(
+                          icon: const Icon(Icons.wb_sunny_rounded),
+                          title: Translation.of(context)
+                              .locationWeatherDetailPageUVIndex,
+                          info: forecast.current.uv.round().toString(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const Gap(16),
+              SizedBox(
+                height: 128,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: InformationTile(
+                          icon: const Icon(Icons.opacity_rounded),
+                          title: Translation.of(context)
+                              .locationWeatherDetailPageHumidity,
+                          info: "${forecast.current.humidity.toString()}%",
+                        ),
+                      ),
+                      const Gap(16),
+                      Expanded(
+                        child: InformationTile(
+                          icon: const Icon(Icons.water_drop_rounded),
+                          title: Translation.of(context)
+                              .locationWeatherDetailPagePrecipitation,
+                          info: "${forecast.current.precipMm.toString()} mm",
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const Gap(24),
+              Text(
+                Translation.of(context).locationWeatherDetailPageLastUpdatedAt(
+                  DateFormat.yMd().add_Hm().format(
+                        DateTime.fromMillisecondsSinceEpoch(
+                                forecast.current.lastUpdatedEpoch * 1000)
+                            .toLocal(),
+                      ),
+                ),
+                style: _theme.textTheme.bodySmall,
+              ),
+            ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }

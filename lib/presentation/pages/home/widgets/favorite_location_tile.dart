@@ -45,7 +45,8 @@ class FavoriteLocationTile extends StatelessWidget {
                   ),
                   Text(
                     "${favorite.current.tempC.round().toString()}°",
-                    style: theme.textTheme.displayMedium,
+                    style: theme.textTheme.displayMedium
+                        ?.copyWith(fontWeight: FontWeight.w200),
                   ),
                 ],
               ),

@@ -22,6 +22,8 @@ WeatherForecastModel _$WeatherForecastModelFromJson(Map<String, dynamic> json) {
 mixin _$WeatherForecastModel {
   CurrentWeatherForecastModel get current => throw _privateConstructorUsedError;
   WeatherLocationModel get location => throw _privateConstructorUsedError;
+  FutureWeatherForecastModel? get forecast =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,10 +38,13 @@ abstract class $WeatherForecastModelCopyWith<$Res> {
       _$WeatherForecastModelCopyWithImpl<$Res, WeatherForecastModel>;
   @useResult
   $Res call(
-      {CurrentWeatherForecastModel current, WeatherLocationModel location});
+      {CurrentWeatherForecastModel current,
+      WeatherLocationModel location,
+      FutureWeatherForecastModel? forecast});
 
   $CurrentWeatherForecastModelCopyWith<$Res> get current;
   $WeatherLocationModelCopyWith<$Res> get location;
+  $FutureWeatherForecastModelCopyWith<$Res>? get forecast;
 }
 
 /// @nodoc
@@ -58,6 +63,7 @@ class _$WeatherForecastModelCopyWithImpl<$Res,
   $Res call({
     Object? current = null,
     Object? location = null,
+    Object? forecast = freezed,
   }) {
     return _then(_value.copyWith(
       current: null == current
@@ -68,6 +74,10 @@ class _$WeatherForecastModelCopyWithImpl<$Res,
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as WeatherLocationModel,
+      forecast: freezed == forecast
+          ? _value.forecast
+          : forecast // ignore: cast_nullable_to_non_nullable
+              as FutureWeatherForecastModel?,
     ) as $Val);
   }
 
@@ -86,6 +96,18 @@ class _$WeatherForecastModelCopyWithImpl<$Res,
       return _then(_value.copyWith(location: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $FutureWeatherForecastModelCopyWith<$Res>? get forecast {
+    if (_value.forecast == null) {
+      return null;
+    }
+
+    return $FutureWeatherForecastModelCopyWith<$Res>(_value.forecast!, (value) {
+      return _then(_value.copyWith(forecast: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -97,12 +119,16 @@ abstract class _$$WeatherForecastModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {CurrentWeatherForecastModel current, WeatherLocationModel location});
+      {CurrentWeatherForecastModel current,
+      WeatherLocationModel location,
+      FutureWeatherForecastModel? forecast});
 
   @override
   $CurrentWeatherForecastModelCopyWith<$Res> get current;
   @override
   $WeatherLocationModelCopyWith<$Res> get location;
+  @override
+  $FutureWeatherForecastModelCopyWith<$Res>? get forecast;
 }
 
 /// @nodoc
@@ -118,6 +144,7 @@ class __$$WeatherForecastModelImplCopyWithImpl<$Res>
   $Res call({
     Object? current = null,
     Object? location = null,
+    Object? forecast = freezed,
   }) {
     return _then(_$WeatherForecastModelImpl(
       current: null == current
@@ -128,6 +155,10 @@ class __$$WeatherForecastModelImplCopyWithImpl<$Res>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as WeatherLocationModel,
+      forecast: freezed == forecast
+          ? _value.forecast
+          : forecast // ignore: cast_nullable_to_non_nullable
+              as FutureWeatherForecastModel?,
     ));
   }
 }
@@ -136,7 +167,7 @@ class __$$WeatherForecastModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$WeatherForecastModelImpl extends _WeatherForecastModel {
   const _$WeatherForecastModelImpl(
-      {required this.current, required this.location})
+      {required this.current, required this.location, this.forecast})
       : super._();
 
   factory _$WeatherForecastModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -146,10 +177,12 @@ class _$WeatherForecastModelImpl extends _WeatherForecastModel {
   final CurrentWeatherForecastModel current;
   @override
   final WeatherLocationModel location;
+  @override
+  final FutureWeatherForecastModel? forecast;
 
   @override
   String toString() {
-    return 'WeatherForecastModel(current: $current, location: $location)';
+    return 'WeatherForecastModel(current: $current, location: $location, forecast: $forecast)';
   }
 
   @override
@@ -159,12 +192,14 @@ class _$WeatherForecastModelImpl extends _WeatherForecastModel {
             other is _$WeatherForecastModelImpl &&
             (identical(other.current, current) || other.current == current) &&
             (identical(other.location, location) ||
-                other.location == location));
+                other.location == location) &&
+            (identical(other.forecast, forecast) ||
+                other.forecast == forecast));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, current, location);
+  int get hashCode => Object.hash(runtimeType, current, location, forecast);
 
   @JsonKey(ignore: true)
   @override
@@ -184,9 +219,9 @@ class _$WeatherForecastModelImpl extends _WeatherForecastModel {
 
 abstract class _WeatherForecastModel extends WeatherForecastModel {
   const factory _WeatherForecastModel(
-          {required final CurrentWeatherForecastModel current,
-          required final WeatherLocationModel location}) =
-      _$WeatherForecastModelImpl;
+      {required final CurrentWeatherForecastModel current,
+      required final WeatherLocationModel location,
+      final FutureWeatherForecastModel? forecast}) = _$WeatherForecastModelImpl;
   const _WeatherForecastModel._() : super._();
 
   factory _WeatherForecastModel.fromJson(Map<String, dynamic> json) =
@@ -196,6 +231,8 @@ abstract class _WeatherForecastModel extends WeatherForecastModel {
   CurrentWeatherForecastModel get current;
   @override
   WeatherLocationModel get location;
+  @override
+  FutureWeatherForecastModel? get forecast;
   @override
   @JsonKey(ignore: true)
   _$$WeatherForecastModelImplCopyWith<_$WeatherForecastModelImpl>

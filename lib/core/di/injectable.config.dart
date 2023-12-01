@@ -19,10 +19,10 @@ import 'package:weather_app/data/datasource/local/favorite_data_box.dart'
     as _i4;
 import 'package:weather_app/data/datasource/location_suggestion_api_datasource.dart'
     as _i11;
-import 'package:weather_app/data/datasource/network_clients/current_weather_forecast_client.dart'
-    as _i10;
 import 'package:weather_app/data/datasource/network_clients/location_suggestions_client.dart'
     as _i9;
+import 'package:weather_app/data/datasource/network_clients/weather_forecast_client.dart'
+    as _i10;
 import 'package:weather_app/data/datasource/weather_forecast_api_datasource.dart'
     as _i15;
 import 'package:weather_app/data/repository/favorite_forecast_repository_impl.dart'
@@ -69,8 +69,8 @@ extension GetItInjectableX on _i1.GetIt {
             gh<_i8.FavoriteForecastLocalDataSource>()));
     gh.lazySingleton<_i9.LocationSuggestionsClient>(
         () => _i9.LocationSuggestionsClient(gh<_i3.Dio>()));
-    gh.lazySingleton<_i10.CurrentWeatherForecastClient>(
-        () => _i10.CurrentWeatherForecastClient(gh<_i3.Dio>()));
+    gh.lazySingleton<_i10.WeatherForecastClient>(
+        () => _i10.WeatherForecastClient(gh<_i3.Dio>()));
     gh.lazySingleton<_i11.LocationSuggestionApiDataSource>(() =>
         _i11.LocationSuggestionApiDataSource(
             gh<_i9.LocationSuggestionsClient>()));
@@ -80,8 +80,7 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i14.SearchLocationBloc>(
         () => _i14.SearchLocationBloc(gh<_i12.LocationSuggestionRepository>()));
     gh.lazySingleton<_i15.WeatherForecastApiDataSource>(() =>
-        _i15.WeatherForecastApiDataSource(
-            gh<_i10.CurrentWeatherForecastClient>()));
+        _i15.WeatherForecastApiDataSource(gh<_i10.WeatherForecastClient>()));
     gh.lazySingleton<_i16.WeatherForecastRepository>(() =>
         _i17.WeatherForecastRepositoryImpl(
             gh<_i8.WeatherForecastApiDataSource>()));

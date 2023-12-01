@@ -11,5 +11,18 @@
                 "type": "String"
             }
         }
+    },
+    "locationWeatherDetailPageFeelsLike": "Feels Like",
+    "locationWeatherDetailPageUVIndex": "UV Index",
+    "locationWeatherDetailPageHumidity": "Humidity",
+    "locationWeatherDetailPagePrecipitation": "Precipitation",
+    "locationWeatherDetailPageLastUpdatedAt": "Last updated at {time}",
+    "@locationWeatherDetailPageLastUpdatedAt": {
+        "description": "time",
+        "placeholders": {
+            "time": {
+                "type": "String"
+            }
+        }
     }
 }
