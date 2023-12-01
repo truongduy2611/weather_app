@@ -45,3 +45,4 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 .lh/
+.fvm/fluter_sdk
