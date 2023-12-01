@@ -44,6 +44,11 @@ class FavoriteLocationCubit extends Cubit<FavoriteLocationState>
     await loadSavedLocationList();
   }
 
+  Future<void> unfavorite(WeatherForecast forecast) async {
+    await favoriteRepository.remove(forecast);
+    await loadSavedLocationList();
+  }
+
   @override
   Future<void> close() {
     WidgetsBinding.instance.removeObserver(this);

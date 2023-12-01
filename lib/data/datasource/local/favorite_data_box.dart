@@ -24,6 +24,9 @@ class FavoriteDataBox {
       Hive.box<Map<dynamic, dynamic>>(HiveBox.favoriteDataBox.name)
           .put(key, value.toJson());
 
+  Future<void> delete(String key) =>
+      Hive.box<Map<dynamic, dynamic>>(HiveBox.favoriteDataBox.name).delete(key);
+
   Iterable get keys =>
       Hive.box<Map<dynamic, dynamic>>(HiveBox.favoriteDataBox.name).keys;
 

@@ -18,4 +18,8 @@ class FavoriteForecastLocalDataSource {
       await _dataBox.setValue(url, data);
     }
   }
+
+  Future<void> remove(String weatherLocation) async {
+    await _dataBox.delete(weatherLocation);
+  }
 }

@@ -21,4 +21,9 @@ class FavoriteForecastRepositoryImpl implements FavoriteForecastRepository {
     return _dataSource
         .persistData(WeatherForecastModel.fromJson(data.toJson()));
   }
+
+  @override
+  Future<void> remove(WeatherForecast data) {
+    return _dataSource.remove(data.location.url ?? data.location.name);
+  }
 }

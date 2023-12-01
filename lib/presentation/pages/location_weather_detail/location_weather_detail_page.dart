@@ -94,9 +94,15 @@ class _LocationWeatherDetailPageState extends State<LocationWeatherDetailPage> {
 
                     return IconButton(
                       onPressed: () {
-                        context
-                            .read<FavoriteLocationCubit>()
-                            .favorite(forecast);
+                        if (hasFavorite) {
+                          context
+                              .read<FavoriteLocationCubit>()
+                              .unfavorite(forecast);
+                        } else {
+                          context
+                              .read<FavoriteLocationCubit>()
+                              .favorite(forecast);
+                        }
                       },
                       icon: Icon(
                         hasFavorite ? Icons.favorite : Icons.favorite_border,
