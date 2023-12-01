@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:weather_app/presentation/pages/home_page.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+import 'presentation/routing/router.dart';
+
+class MyApp extends StatefulWidget {
+  const MyApp({super.key, required this.router});
+
+  final AppRouter router;
 
   @override
+  State<MyApp> createState() => MyAppState();
+}
+
+class MyAppState extends State<MyApp> {
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Weather App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -15,7 +23,7 @@ class MyApp extends StatelessWidget {
       ),
       localizationsDelegates: Translation.localizationsDelegates,
       supportedLocales: Translation.supportedLocales,
-      home: const HomePage(),
+      routerConfig: widget.router.config(),
     );
   }
 }
