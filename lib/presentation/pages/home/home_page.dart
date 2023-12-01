@@ -151,20 +151,25 @@ class _HomePageState extends State<HomePage> {
             return const SizedBox();
           },
           loaded: (favoriteList) {
-            return ListView.separated(
-              padding: const EdgeInsets.all(16),
-              separatorBuilder: (context, i) => const Gap(16),
-              itemBuilder: (context, i) {
-                final favorite = favoriteList[i];
+            return RefreshIndicator(
+              onRefresh: context
+                  .read<FavoriteLocationCubit>()
+                  .refreshSavedLocationList,
+              child: ListView.separated(
+                padding: const EdgeInsets.all(16),
+                separatorBuilder: (context, i) => const Gap(16),
+                itemBuilder: (context, i) {
+                  final favorite = favoriteList[i];
 
-                return FavoriteLocationTile(
-                  favorite: favorite,
-                  onTap: () {
-                    _onTapLocation(favorite.location);
-                  },
-                );
-              },
-              itemCount: favoriteList.length,
+                  return FavoriteLocationTile(
+                    favorite: favorite,
+                    onTap: () {
+                      _onTapLocation(favorite.location);
+                    },
+                  );
+                },
+                itemCount: favoriteList.length,
+              ),
             );
           },
         );
