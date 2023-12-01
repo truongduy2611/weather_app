@@ -14,9 +14,10 @@ _$WeatherLocationImpl _$$WeatherLocationImplFromJson(
       country: json['country'] as String,
       lat: (json['lat'] as num).toDouble(),
       lon: (json['lon'] as num).toDouble(),
-      tzId: json['tzId'] as String,
-      localTimeEpoch: json['localTimeEpoch'] as int,
-      localTime: json['localTime'] as String,
+      tzId: json['tzId'] as String?,
+      localTimeEpoch: json['localTimeEpoch'] as int?,
+      localTime: json['localTime'] as String?,
+      id: json['id'] as int?,
     );
 
 Map<String, dynamic> _$$WeatherLocationImplToJson(
@@ -30,4 +31,5 @@ Map<String, dynamic> _$$WeatherLocationImplToJson(
       'tzId': instance.tzId,
       'localTimeEpoch': instance.localTimeEpoch,
       'localTime': instance.localTime,
+      'id': instance.id,
     };

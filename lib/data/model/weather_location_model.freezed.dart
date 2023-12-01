@@ -26,11 +26,12 @@ mixin _$WeatherLocationModel {
   double get lat => throw _privateConstructorUsedError;
   double get lon => throw _privateConstructorUsedError;
   @JsonKey(name: 'tz_id')
-  String get tzId => throw _privateConstructorUsedError;
+  String? get tzId => throw _privateConstructorUsedError;
   @JsonKey(name: 'localtime_epoch')
-  int get localTimeEpoch => throw _privateConstructorUsedError;
+  int? get localTimeEpoch => throw _privateConstructorUsedError;
   @JsonKey(name: 'localtime')
-  String get localTime => throw _privateConstructorUsedError;
+  String? get localTime => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,9 +51,10 @@ abstract class $WeatherLocationModelCopyWith<$Res> {
       String country,
       double lat,
       double lon,
-      @JsonKey(name: 'tz_id') String tzId,
-      @JsonKey(name: 'localtime_epoch') int localTimeEpoch,
-      @JsonKey(name: 'localtime') String localTime});
+      @JsonKey(name: 'tz_id') String? tzId,
+      @JsonKey(name: 'localtime_epoch') int? localTimeEpoch,
+      @JsonKey(name: 'localtime') String? localTime,
+      int? id});
 }
 
 /// @nodoc
@@ -74,9 +76,10 @@ class _$WeatherLocationModelCopyWithImpl<$Res,
     Object? country = null,
     Object? lat = null,
     Object? lon = null,
-    Object? tzId = null,
-    Object? localTimeEpoch = null,
-    Object? localTime = null,
+    Object? tzId = freezed,
+    Object? localTimeEpoch = freezed,
+    Object? localTime = freezed,
+    Object? id = freezed,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -99,18 +102,22 @@ class _$WeatherLocationModelCopyWithImpl<$Res,
           ? _value.lon
           : lon // ignore: cast_nullable_to_non_nullable
               as double,
-      tzId: null == tzId
+      tzId: freezed == tzId
           ? _value.tzId
           : tzId // ignore: cast_nullable_to_non_nullable
-              as String,
-      localTimeEpoch: null == localTimeEpoch
+              as String?,
+      localTimeEpoch: freezed == localTimeEpoch
           ? _value.localTimeEpoch
           : localTimeEpoch // ignore: cast_nullable_to_non_nullable
-              as int,
-      localTime: null == localTime
+              as int?,
+      localTime: freezed == localTime
           ? _value.localTime
           : localTime // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -129,9 +136,10 @@ abstract class _$$WeatherLocationModelImplCopyWith<$Res>
       String country,
       double lat,
       double lon,
-      @JsonKey(name: 'tz_id') String tzId,
-      @JsonKey(name: 'localtime_epoch') int localTimeEpoch,
-      @JsonKey(name: 'localtime') String localTime});
+      @JsonKey(name: 'tz_id') String? tzId,
+      @JsonKey(name: 'localtime_epoch') int? localTimeEpoch,
+      @JsonKey(name: 'localtime') String? localTime,
+      int? id});
 }
 
 /// @nodoc
@@ -150,9 +158,10 @@ class __$$WeatherLocationModelImplCopyWithImpl<$Res>
     Object? country = null,
     Object? lat = null,
     Object? lon = null,
-    Object? tzId = null,
-    Object? localTimeEpoch = null,
-    Object? localTime = null,
+    Object? tzId = freezed,
+    Object? localTimeEpoch = freezed,
+    Object? localTime = freezed,
+    Object? id = freezed,
   }) {
     return _then(_$WeatherLocationModelImpl(
       name: null == name
@@ -175,18 +184,22 @@ class __$$WeatherLocationModelImplCopyWithImpl<$Res>
           ? _value.lon
           : lon // ignore: cast_nullable_to_non_nullable
               as double,
-      tzId: null == tzId
+      tzId: freezed == tzId
           ? _value.tzId
           : tzId // ignore: cast_nullable_to_non_nullable
-              as String,
-      localTimeEpoch: null == localTimeEpoch
+              as String?,
+      localTimeEpoch: freezed == localTimeEpoch
           ? _value.localTimeEpoch
           : localTimeEpoch // ignore: cast_nullable_to_non_nullable
-              as int,
-      localTime: null == localTime
+              as int?,
+      localTime: freezed == localTime
           ? _value.localTime
           : localTime // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -203,7 +216,8 @@ class _$WeatherLocationModelImpl extends _WeatherLocationModel {
       required this.lon,
       @JsonKey(name: 'tz_id') required this.tzId,
       @JsonKey(name: 'localtime_epoch') required this.localTimeEpoch,
-      @JsonKey(name: 'localtime') required this.localTime})
+      @JsonKey(name: 'localtime') required this.localTime,
+      required this.id})
       : super._();
 
   factory _$WeatherLocationModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -221,17 +235,19 @@ class _$WeatherLocationModelImpl extends _WeatherLocationModel {
   final double lon;
   @override
   @JsonKey(name: 'tz_id')
-  final String tzId;
+  final String? tzId;
   @override
   @JsonKey(name: 'localtime_epoch')
-  final int localTimeEpoch;
+  final int? localTimeEpoch;
   @override
   @JsonKey(name: 'localtime')
-  final String localTime;
+  final String? localTime;
+  @override
+  final int? id;
 
   @override
   String toString() {
-    return 'WeatherLocationModel(name: $name, region: $region, country: $country, lat: $lat, lon: $lon, tzId: $tzId, localTimeEpoch: $localTimeEpoch, localTime: $localTime)';
+    return 'WeatherLocationModel(name: $name, region: $region, country: $country, lat: $lat, lon: $lon, tzId: $tzId, localTimeEpoch: $localTimeEpoch, localTime: $localTime, id: $id)';
   }
 
   @override
@@ -248,13 +264,14 @@ class _$WeatherLocationModelImpl extends _WeatherLocationModel {
             (identical(other.localTimeEpoch, localTimeEpoch) ||
                 other.localTimeEpoch == localTimeEpoch) &&
             (identical(other.localTime, localTime) ||
-                other.localTime == localTime));
+                other.localTime == localTime) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, name, region, country, lat, lon,
-      tzId, localTimeEpoch, localTime);
+      tzId, localTimeEpoch, localTime, id);
 
   @JsonKey(ignore: true)
   @override
@@ -274,15 +291,15 @@ class _$WeatherLocationModelImpl extends _WeatherLocationModel {
 
 abstract class _WeatherLocationModel extends WeatherLocationModel {
   const factory _WeatherLocationModel(
-          {required final String name,
-          required final String region,
-          required final String country,
-          required final double lat,
-          required final double lon,
-          @JsonKey(name: 'tz_id') required final String tzId,
-          @JsonKey(name: 'localtime_epoch') required final int localTimeEpoch,
-          @JsonKey(name: 'localtime') required final String localTime}) =
-      _$WeatherLocationModelImpl;
+      {required final String name,
+      required final String region,
+      required final String country,
+      required final double lat,
+      required final double lon,
+      @JsonKey(name: 'tz_id') required final String? tzId,
+      @JsonKey(name: 'localtime_epoch') required final int? localTimeEpoch,
+      @JsonKey(name: 'localtime') required final String? localTime,
+      required final int? id}) = _$WeatherLocationModelImpl;
   const _WeatherLocationModel._() : super._();
 
   factory _WeatherLocationModel.fromJson(Map<String, dynamic> json) =
@@ -300,13 +317,15 @@ abstract class _WeatherLocationModel extends WeatherLocationModel {
   double get lon;
   @override
   @JsonKey(name: 'tz_id')
-  String get tzId;
+  String? get tzId;
   @override
   @JsonKey(name: 'localtime_epoch')
-  int get localTimeEpoch;
+  int? get localTimeEpoch;
   @override
   @JsonKey(name: 'localtime')
-  String get localTime;
+  String? get localTime;
+  @override
+  int? get id;
   @override
   @JsonKey(ignore: true)
   _$$WeatherLocationModelImplCopyWith<_$WeatherLocationModelImpl>

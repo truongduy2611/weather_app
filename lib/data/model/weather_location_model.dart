@@ -18,9 +18,10 @@ class WeatherLocationModel
     required String country,
     required double lat,
     required double lon,
-    @JsonKey(name: 'tz_id') required String tzId,
-    @JsonKey(name: 'localtime_epoch') required int localTimeEpoch,
-    @JsonKey(name: 'localtime') required String localTime,
+    @JsonKey(name: 'tz_id') required String? tzId,
+    @JsonKey(name: 'localtime_epoch') required int? localTimeEpoch,
+    @JsonKey(name: 'localtime') required String? localTime,
+    required int? id,
   }) = _WeatherLocationModel;
 
   factory WeatherLocationModel.fromJson(Map<String, dynamic> json) =>
@@ -37,6 +38,7 @@ class WeatherLocationModel
       localTimeEpoch: localTimeEpoch,
       localTime: localTime,
       name: name,
+      id: id,
     );
   }
 }

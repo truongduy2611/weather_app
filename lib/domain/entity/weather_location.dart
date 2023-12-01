@@ -11,9 +11,10 @@ class WeatherLocation with _$WeatherLocation {
     required String country,
     required double lat,
     required double lon,
-    required String tzId,
-    required int localTimeEpoch,
-    required String localTime,
+    required String? tzId,
+    required int? localTimeEpoch,
+    required String? localTime,
+    required int? id,
   }) = _WeatherLocation;
 
   factory WeatherLocation.fromJson(Map<String, dynamic> json) =>
