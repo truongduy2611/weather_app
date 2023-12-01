@@ -20,6 +20,7 @@ class MyAppState extends State<MyApp> {
     return BlocProvider<FavoriteLocationCubit>(
       create: (_) => sl()..loadSavedLocationList(),
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         title: 'Weather App',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

@@ -1,16 +1,23 @@
 # weather_app
 
-A new Flutter project.
+A new weather app.
+
+## Introduction
+
+An simple weather app using https://api.weatherapi.com.
+With weather app, you can:
+
+- Search for a place by using city name, US Zipcode, UK Postcode, Canada Postalcode, IP address, Latitude/Longitude
+- View realtime weather, and weather forecast for next hours.
+- Favorite some places to view later
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+- To run the app, you need flutter 3.16.1 or above.
+- Run ``flutter pub get``
+- Then run ``flutter packages pub run build_runner build --delete-conflicting-outputs`` to generate files.
+- ``flutter run --flavor dev`` to start for dev environment (stg for staging and prod for production)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+| Screenshots 1                    | Screenshots 2                    |
+| -------------------------------- | -------------------------------- |
+| ![A](screenshots/screenshots1.png) | ![B](screenshots/screenshots2.png) |
