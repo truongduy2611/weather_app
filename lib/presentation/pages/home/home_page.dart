@@ -32,7 +32,7 @@ class HomePage extends StatefulWidget implements AutoRouteWrapper {
 
 class _HomePageState extends State<HomePage> {
   late final _translation = Translation.of(context);
-  final _searchTextController = TextEditingController();
+  late final _searchTextController = TextEditingController();
 
   void _onSearchChanged(String? query) {
     if (query?.trim().isNotEmpty == true) {

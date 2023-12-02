@@ -14,7 +14,7 @@ class MockWeatherForecastRepository extends Mock
 void main() {
   late WeatherForecastRepository repository;
   const query = 'London';
-  final fixture = 'current.json'.toFixture();
+  final fixture = 'forecast.json'.toFixture();
   final entity = WeatherForecastModel.fromJson(fixture).toEntity();
   const errorMessage = 'Unexpected error!';
 
@@ -29,7 +29,7 @@ void main() {
         return LocationWeatherDetailCubit(repository)..location = query;
       },
       setUp: () {
-        when(() => repository.getCurrentWeather(query)).thenAnswer(
+        when(() => repository.getWeatherForecast(query, 1)).thenAnswer(
           (_) async => entity,
         );
       },
@@ -38,7 +38,11 @@ void main() {
       },
       wait: const Duration(milliseconds: 500),
       expect: () => <LocationWeatherDetailState>[
-        LocationWeatherDetailState.loaded(entity),
+        LocationWeatherDetailState.loaded(
+          entity.copyWith(
+            location: entity.location.copyWith(url: query),
+          ),
+        ),
       ],
     );
 
@@ -48,7 +52,7 @@ void main() {
         return LocationWeatherDetailCubit(repository)..location = query;
       },
       setUp: () {
-        when(() => repository.getCurrentWeather(query)).thenThrow(
+        when(() => repository.getWeatherForecast(query, 1)).thenThrow(
           DioException(
             response: Response(
               data: errorMessage,
