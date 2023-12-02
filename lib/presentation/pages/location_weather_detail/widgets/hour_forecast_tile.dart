@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_app/core/core.dart';
 import 'package:weather_app/domain/entity/entities.dart';
+import 'package:weather_app/presentation/widgets/temp_unit_builder.dart';
 
 class HourForecastTile extends StatelessWidget {
   const HourForecastTile({
@@ -48,10 +49,14 @@ class HourForecastTile extends StatelessWidget {
               height: 48,
             ),
             const Gap(4),
-            Text(
-              "${forecast.tempC.round().toString()}°",
-              style: theme.textTheme.titleLarge
-                  ?.copyWith(fontWeight: FontWeight.w300),
+            TempUnitBuilder(
+              inC: forecast.tempC,
+              inF: forecast.tempF,
+              builder: (context, data) => Text(
+                data,
+                style: theme.textTheme.titleLarge
+                    ?.copyWith(fontWeight: FontWeight.w300),
+              ),
             ),
           ],
         ),

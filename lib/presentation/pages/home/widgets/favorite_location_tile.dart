@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:weather_app/domain/entity/entities.dart';
+import 'package:weather_app/presentation/widgets/temp_unit_builder.dart';
 
 class FavoriteLocationTile extends StatelessWidget {
   const FavoriteLocationTile({
@@ -43,10 +44,16 @@ class FavoriteLocationTile extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Text(
-                    "${favorite.current.tempC.round().toString()}°",
-                    style: theme.textTheme.displayMedium
-                        ?.copyWith(fontWeight: FontWeight.w200),
+                  TempUnitBuilder(
+                    inC: favorite.current.tempC,
+                    inF: favorite.current.tempF,
+                    builder: (context, data) {
+                      return Text(
+                        data,
+                        style: theme.textTheme.displayMedium
+                            ?.copyWith(fontWeight: FontWeight.w200),
+                      );
+                    },
                   ),
                 ],
               ),

@@ -10,6 +10,7 @@ import 'package:weather_app/presentation/pages/home/bloc/favorite_location/favor
 import 'package:weather_app/presentation/pages/location_weather_detail/widgets/information_tile.dart';
 import 'package:weather_app/presentation/widgets/error_container.dart';
 import 'package:weather_app/presentation/widgets/leading_button.dart';
+import 'package:weather_app/presentation/widgets/temp_unit_builder.dart';
 
 import 'cubit/location_weather_detail_cubit.dart';
 import 'widgets/hour_forecast_tile.dart';
@@ -161,10 +162,14 @@ class _LocationWeatherDetailPageState extends State<LocationWeatherDetailPage> {
                   );
                 },
               ),
-              Text(
-                "${forecast.current.tempC.round().toString()}°",
-                style: _theme.textTheme.displayLarge
-                    ?.copyWith(fontWeight: FontWeight.w200),
+              TempUnitBuilder(
+                inC: forecast.current.tempC,
+                inF: forecast.current.tempF,
+                builder: (context, data) => Text(
+                  data,
+                  style: _theme.textTheme.displayLarge
+                      ?.copyWith(fontWeight: FontWeight.w200),
+                ),
               ),
               const Gap(8),
               Text(
@@ -195,12 +200,15 @@ class _LocationWeatherDetailPageState extends State<LocationWeatherDetailPage> {
                   child: Row(
                     children: [
                       Expanded(
-                        child: InformationTile(
-                          icon: const Icon(Icons.device_thermostat_rounded),
-                          title: Translation.of(context)
-                              .locationWeatherDetailPageFeelsLike,
-                          info:
-                              "${forecast.current.feelsLikeC.round().toString()}°",
+                        child: TempUnitBuilder(
+                          inC: forecast.current.feelsLikeC,
+                          inF: forecast.current.feelsLikeF,
+                          builder: (context, data) => InformationTile(
+                            icon: const Icon(Icons.device_thermostat_rounded),
+                            title: Translation.of(context)
+                                .locationWeatherDetailPageFeelsLike,
+                            info: data,
+                          ),
                         ),
                       ),
                       const Gap(16),

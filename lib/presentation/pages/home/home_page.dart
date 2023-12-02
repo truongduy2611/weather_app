@@ -10,6 +10,7 @@ import 'package:weather_app/presentation/widgets/error_container.dart';
 
 import 'bloc/search_location/search_location_bloc.dart';
 import 'widgets/favorite_location_tile.dart';
+import 'widgets/menu_setting_button.dart';
 import 'widgets/search_widget.dart';
 
 @RoutePage()
@@ -52,6 +53,9 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           title: Text(_translation.homePageWeatherTitle),
           centerTitle: true,
+          actions: const [
+            MenuSettingButton(),
+          ],
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(48),
             child: Padding(
