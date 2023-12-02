@@ -16,6 +16,7 @@
     "locationWeatherDetailPageUVIndex": "UV Index",
     "locationWeatherDetailPageHumidity": "Humidity",
     "locationWeatherDetailPagePrecipitation": "Precipitation",
+    "locationWeatherDetailPageNow": "Now",
     "locationWeatherDetailPageLastUpdatedAt": "Last updated at {time}",
     "@locationWeatherDetailPageLastUpdatedAt": {
         "description": "time",

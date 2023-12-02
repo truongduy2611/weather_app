@@ -47,6 +47,8 @@ class LocationWeatherDetailPage extends StatefulWidget
 
 class _LocationWeatherDetailPageState extends State<LocationWeatherDetailPage> {
   late final _theme = Theme.of(context);
+  late final _hourTileScrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,8 +60,9 @@ class _LocationWeatherDetailPageState extends State<LocationWeatherDetailPage> {
         ],
       ),
       body: Center(
-        child:
-            BlocBuilder<LocationWeatherDetailCubit, LocationWeatherDetailState>(
+        child: BlocConsumer<LocationWeatherDetailCubit,
+            LocationWeatherDetailState>(
+          listener: _weatherDetailListener,
           builder: (context, state) {
             return state.when(
               initial: () {
@@ -124,9 +127,14 @@ class _LocationWeatherDetailPageState extends State<LocationWeatherDetailPage> {
 
   Widget _buildForecast(WeatherForecast forecast) {
     final forecastDay = forecast.forecast?.forecastday.isNotEmpty == true
-        ? forecast.forecast?.forecastday.first
+        ? forecast.forecast?.forecastday
         : null;
-    final hourForecastList = forecastDay?.hour ?? [];
+    final hourForecastList = forecastDay != null
+        ? [
+            for (final day in forecastDay)
+              for (final hour in day.hour) hour,
+          ]
+        : [];
     return CustomScrollView(
       slivers: [
         SliverToBoxAdapter(
@@ -167,12 +175,15 @@ class _LocationWeatherDetailPageState extends State<LocationWeatherDetailPage> {
               SizedBox(
                 height: 128 + 32,
                 child: ListView.separated(
+                  controller: _hourTileScrollController,
                   separatorBuilder: (context, i) => const Gap(16),
                   padding: const EdgeInsets.all(16),
                   scrollDirection: Axis.horizontal,
                   itemCount: hourForecastList.length,
                   itemBuilder: (context, i) => HourForecastTile(
                     forecast: hourForecastList[i],
+                    location: forecast.location,
+                    key: GlobalObjectKey('hour_card_$i'),
                   ),
                 ),
               ),
@@ -237,8 +248,7 @@ class _LocationWeatherDetailPageState extends State<LocationWeatherDetailPage> {
               Text(
                 Translation.of(context).locationWeatherDetailPageLastUpdatedAt(
                   DateFormat.yMd().add_Hm().format(
-                        DateTime.fromMillisecondsSinceEpoch(
-                                forecast.current.lastUpdatedEpoch * 1000)
+                        forecast.current.lastUpdatedEpoch.dateTimeFromSeconds
                             .toLocal(),
                       ),
                 ),
@@ -250,5 +260,50 @@ class _LocationWeatherDetailPageState extends State<LocationWeatherDetailPage> {
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    _hourTileScrollController.dispose();
+    super.dispose();
+  }
+
+  void _weatherDetailListener(
+    BuildContext context,
+    LocationWeatherDetailState state,
+  ) {
+    state.mapOrNull(loaded: (state) {
+      final forecast = state.forecast;
+      final forecastDay = forecast.forecast?.forecastday.isNotEmpty == true
+          ? forecast.forecast?.forecastday.first
+          : null;
+      final hourForecastList = forecastDay?.hour ?? [];
+      if (hourForecastList.isNotEmpty) {
+        WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+          final nowInLocation =
+              DateTime.tryParse(forecast.location.localTime ?? '') ??
+                  DateTime.now();
+          final indexOfCurrentHourTile = hourForecastList.indexWhere(
+              (e) => DateTime.tryParse(e.time)?.hour == nowInLocation.hour);
+          if (_hourTileScrollController.hasClients &&
+              indexOfCurrentHourTile >= 0) {
+            _hourTileScrollController
+                .jumpTo((indexOfCurrentHourTile + 1) * 128);
+            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+              final context =
+                  GlobalObjectKey('hour_card_$indexOfCurrentHourTile')
+                      .currentContext;
+              if (context != null) {
+                Scrollable.ensureVisible(
+                  context,
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.easeIn,
+                );
+              }
+            });
+          }
+        });
+      }
+    });
   }
 }

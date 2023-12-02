@@ -41,7 +41,7 @@ class _WeatherForecastClient implements WeatherForecastClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = WeatherForecastModel.fromJson(_result.data!);
+    final value = await compute(deserializeWeatherForecastModel, _result.data!);
     return value;
   }
 
@@ -53,7 +53,7 @@ class _WeatherForecastClient implements WeatherForecastClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'q': query,
-      r'day': numberOfDay,
+      r'days': numberOfDay,
     };
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
@@ -74,7 +74,7 @@ class _WeatherForecastClient implements WeatherForecastClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = WeatherForecastModel.fromJson(_result.data!);
+    final value = await compute(deserializeWeatherForecastModel, _result.data!);
     return value;
   }
 

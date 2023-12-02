@@ -4,4 +4,5 @@ export 'config.dart';
 export 'constant/constants.dart';
 export 'di/injectable.dart';
 export 'keys.dart';
+export 'utility/date_time.dart';
 export 'utility/map_cast_converter.dart';
