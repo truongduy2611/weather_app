@@ -148,35 +148,48 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  // Widget get
+
   Widget _buildFavoriteList() {
     return BlocBuilder<FavoriteLocationCubit, FavoriteLocationState>(
       builder: (context, state) {
-        return state.when(
-          initial: () {
-            return const SizedBox();
-          },
-          loaded: (favoriteList) {
-            return RefreshIndicator(
-              onRefresh: context
-                  .read<FavoriteLocationCubit>()
-                  .refreshSavedLocationList,
-              child: ListView.separated(
-                padding: const EdgeInsets.all(16),
-                separatorBuilder: (context, i) => const Gap(16),
-                itemBuilder: (context, i) {
-                  final favorite = favoriteList[i];
+        final favoriteList = state.when(
+          initial: () => [],
+          loaded: (list) => list,
+        );
 
-                  return FavoriteLocationTile(
-                    favorite: favorite,
-                    onTap: () {
-                      _onTapLocation(favorite.location);
-                    },
-                  );
+        return RefreshIndicator(
+          onRefresh:
+              context.read<FavoriteLocationCubit>().refreshSavedLocationList,
+          child: ListView.separated(
+            padding: const EdgeInsets.all(16),
+            separatorBuilder: (context, i) => const Gap(16),
+            itemBuilder: (context, i) {
+              final favorite = favoriteList[i];
+
+              return Dismissible(
+                key: ValueKey(favorite),
+                background: Container(
+                  alignment: Alignment.centerRight,
+                  padding: const EdgeInsets.all(16),
+                  child: const Icon(
+                    Icons.heart_broken_rounded,
+                  ),
+                ),
+                direction: DismissDirection.endToStart,
+                onDismissed: (_) {
+                  context.read<FavoriteLocationCubit>().unfavorite(favorite);
                 },
-                itemCount: favoriteList.length,
-              ),
-            );
-          },
+                child: FavoriteLocationTile(
+                  favorite: favorite,
+                  onTap: () {
+                    _onTapLocation(favorite.location);
+                  },
+                ),
+              );
+            },
+            itemCount: favoriteList.length,
+          ),
         );
       },
     );
