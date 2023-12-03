@@ -40,6 +40,8 @@ class _HomePageState extends State<HomePage> {
       context
           .read<SearchLocationBloc>()
           .add(SearchLocationEvent.search(query!));
+    } else {
+      context.read<SearchLocationBloc>().add(const SearchLocationEvent.reset());
     }
   }
 

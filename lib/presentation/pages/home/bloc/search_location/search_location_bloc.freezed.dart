@@ -16,42 +16,43 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SearchLocationEvent {
-  String get query => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String query) search,
+    required TResult Function() reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String query)? search,
+    TResult? Function()? reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String query)? search,
+    TResult Function()? reset,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Search value) search,
+    required TResult Function(_SearchLocation value) search,
+    required TResult Function(_ResetSearch value) reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Search value)? search,
+    TResult? Function(_SearchLocation value)? search,
+    TResult? Function(_ResetSearch value)? reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Search value)? search,
+    TResult Function(_SearchLocation value)? search,
+    TResult Function(_ResetSearch value)? reset,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $SearchLocationEventCopyWith<SearchLocationEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -60,8 +61,6 @@ abstract class $SearchLocationEventCopyWith<$Res> {
   factory $SearchLocationEventCopyWith(
           SearchLocationEvent value, $Res Function(SearchLocationEvent) then) =
       _$SearchLocationEventCopyWithImpl<$Res, SearchLocationEvent>;
-  @useResult
-  $Res call({String query});
 }
 
 /// @nodoc
@@ -73,38 +72,23 @@ class _$SearchLocationEventCopyWithImpl<$Res, $Val extends SearchLocationEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? query = null,
-  }) {
-    return _then(_value.copyWith(
-      query: null == query
-          ? _value.query
-          : query // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$SearchImplCopyWith<$Res>
-    implements $SearchLocationEventCopyWith<$Res> {
-  factory _$$SearchImplCopyWith(
-          _$SearchImpl value, $Res Function(_$SearchImpl) then) =
-      __$$SearchImplCopyWithImpl<$Res>;
-  @override
+abstract class _$$SearchLocationImplCopyWith<$Res> {
+  factory _$$SearchLocationImplCopyWith(_$SearchLocationImpl value,
+          $Res Function(_$SearchLocationImpl) then) =
+      __$$SearchLocationImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String query});
 }
 
 /// @nodoc
-class __$$SearchImplCopyWithImpl<$Res>
-    extends _$SearchLocationEventCopyWithImpl<$Res, _$SearchImpl>
-    implements _$$SearchImplCopyWith<$Res> {
-  __$$SearchImplCopyWithImpl(
-      _$SearchImpl _value, $Res Function(_$SearchImpl) _then)
+class __$$SearchLocationImplCopyWithImpl<$Res>
+    extends _$SearchLocationEventCopyWithImpl<$Res, _$SearchLocationImpl>
+    implements _$$SearchLocationImplCopyWith<$Res> {
+  __$$SearchLocationImplCopyWithImpl(
+      _$SearchLocationImpl _value, $Res Function(_$SearchLocationImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -112,7 +96,7 @@ class __$$SearchImplCopyWithImpl<$Res>
   $Res call({
     Object? query = null,
   }) {
-    return _then(_$SearchImpl(
+    return _then(_$SearchLocationImpl(
       null == query
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
@@ -123,8 +107,8 @@ class __$$SearchImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SearchImpl implements _Search {
-  const _$SearchImpl(this.query);
+class _$SearchLocationImpl implements _SearchLocation {
+  const _$SearchLocationImpl(this.query);
 
   @override
   final String query;
@@ -138,7 +122,7 @@ class _$SearchImpl implements _Search {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SearchImpl &&
+            other is _$SearchLocationImpl &&
             (identical(other.query, query) || other.query == query));
   }
 
@@ -148,13 +132,15 @@ class _$SearchImpl implements _Search {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SearchImplCopyWith<_$SearchImpl> get copyWith =>
-      __$$SearchImplCopyWithImpl<_$SearchImpl>(this, _$identity);
+  _$$SearchLocationImplCopyWith<_$SearchLocationImpl> get copyWith =>
+      __$$SearchLocationImplCopyWithImpl<_$SearchLocationImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String query) search,
+    required TResult Function() reset,
   }) {
     return search(query);
   }
@@ -163,6 +149,7 @@ class _$SearchImpl implements _Search {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String query)? search,
+    TResult? Function()? reset,
   }) {
     return search?.call(query);
   }
@@ -171,6 +158,7 @@ class _$SearchImpl implements _Search {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String query)? search,
+    TResult Function()? reset,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -182,7 +170,8 @@ class _$SearchImpl implements _Search {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Search value) search,
+    required TResult Function(_SearchLocation value) search,
+    required TResult Function(_ResetSearch value) reset,
   }) {
     return search(this);
   }
@@ -190,7 +179,8 @@ class _$SearchImpl implements _Search {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Search value)? search,
+    TResult? Function(_SearchLocation value)? search,
+    TResult? Function(_ResetSearch value)? reset,
   }) {
     return search?.call(this);
   }
@@ -198,7 +188,8 @@ class _$SearchImpl implements _Search {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Search value)? search,
+    TResult Function(_SearchLocation value)? search,
+    TResult Function(_ResetSearch value)? reset,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -208,15 +199,115 @@ class _$SearchImpl implements _Search {
   }
 }
 
-abstract class _Search implements SearchLocationEvent {
-  const factory _Search(final String query) = _$SearchImpl;
+abstract class _SearchLocation implements SearchLocationEvent {
+  const factory _SearchLocation(final String query) = _$SearchLocationImpl;
+
+  String get query;
+  @JsonKey(ignore: true)
+  _$$SearchLocationImplCopyWith<_$SearchLocationImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ResetSearchImplCopyWith<$Res> {
+  factory _$$ResetSearchImplCopyWith(
+          _$ResetSearchImpl value, $Res Function(_$ResetSearchImpl) then) =
+      __$$ResetSearchImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ResetSearchImplCopyWithImpl<$Res>
+    extends _$SearchLocationEventCopyWithImpl<$Res, _$ResetSearchImpl>
+    implements _$$ResetSearchImplCopyWith<$Res> {
+  __$$ResetSearchImplCopyWithImpl(
+      _$ResetSearchImpl _value, $Res Function(_$ResetSearchImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ResetSearchImpl implements _ResetSearch {
+  const _$ResetSearchImpl();
 
   @override
-  String get query;
+  String toString() {
+    return 'SearchLocationEvent.reset()';
+  }
+
   @override
-  @JsonKey(ignore: true)
-  _$$SearchImplCopyWith<_$SearchImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ResetSearchImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String query) search,
+    required TResult Function() reset,
+  }) {
+    return reset();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String query)? search,
+    TResult? Function()? reset,
+  }) {
+    return reset?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String query)? search,
+    TResult Function()? reset,
+    required TResult orElse(),
+  }) {
+    if (reset != null) {
+      return reset();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SearchLocation value) search,
+    required TResult Function(_ResetSearch value) reset,
+  }) {
+    return reset(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_SearchLocation value)? search,
+    TResult? Function(_ResetSearch value)? reset,
+  }) {
+    return reset?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SearchLocation value)? search,
+    TResult Function(_ResetSearch value)? reset,
+    required TResult orElse(),
+  }) {
+    if (reset != null) {
+      return reset(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ResetSearch implements SearchLocationEvent {
+  const factory _ResetSearch() = _$ResetSearchImpl;
 }
 
 /// @nodoc

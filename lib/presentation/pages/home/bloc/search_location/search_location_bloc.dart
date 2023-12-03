@@ -16,18 +16,19 @@ part 'search_location_state.dart';
 class SearchLocationBloc
     extends Bloc<SearchLocationEvent, SearchLocationState> {
   SearchLocationBloc(this._repository) : super(const _Initial()) {
-    on<SearchLocationEvent>(
+    on<_SearchLocation>(
       _onSearchEvent,
       transformer: (events, mapper) => events
           .debounceTime(const Duration(milliseconds: 300))
           .switchMap(mapper),
     );
+    on<_ResetSearch>(_onResetEvent);
   }
 
   final LocationSuggestionRepository _repository;
 
   FutureOr<void> _onSearchEvent(
-    SearchLocationEvent event,
+    _SearchLocation event,
     Emitter<SearchLocationState> emit,
   ) async {
     try {
@@ -36,5 +37,12 @@ class SearchLocationBloc
     } catch (e) {
       emit(SearchLocationState.error(e.apiError.toString()));
     }
+  }
+
+  FutureOr<void> _onResetEvent(
+    _ResetSearch event,
+    Emitter<SearchLocationState> emit,
+  ) async {
+    emit(const SearchLocationState.loaded([]));
   }
 }

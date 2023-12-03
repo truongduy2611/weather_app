@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/presentation/pages/home/bloc/unit_settings/unit_settings_cubit.dart';
 
@@ -12,7 +13,7 @@ class TempUnitBuilder extends StatelessWidget {
 
   final double inC;
   final double inF;
-  final Function(BuildContext, String) builder;
+  final Widget Function(BuildContext, String) builder;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class TempUnitBuilder extends StatelessWidget {
         return builder(
           context,
           isCelsius ? '${inC.round()}°' : '${inF.round()}°',
-        );
+        ).animate(key: ValueKey(isCelsius)).fadeIn();
       },
     );
   }
